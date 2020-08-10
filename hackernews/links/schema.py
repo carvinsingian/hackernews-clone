@@ -13,3 +13,4 @@ class Query(graphene.ObjectType):
 
   def resolve_links(self, info, **kwargs):
     return Link.objects.all()
+    
