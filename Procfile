@@ -1,1 +1,1 @@
-web: gunicorn hackernews.wsgi
+web: gunicorn hackernews.hackernews.wsgi
