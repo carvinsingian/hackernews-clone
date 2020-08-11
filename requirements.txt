@@ -7,7 +7,6 @@ graphene==2.1.8
 graphene-django==2.2.0
 graphql-core==2.3.2
 graphql-relay==2.0.1
-pkg-resources==0.0.0
 promise==2.3
 PyJWT==1.7.1
 pytz==2020.1
