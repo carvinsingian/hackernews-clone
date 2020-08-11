@@ -25,7 +25,9 @@ SECRET_KEY = 'a@i$vib*a8665n8rvg#eq6svr*n5c6$evrwkivtgbp5!t%=62t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'hackernews-clone-carvin.herokuapp.com'
+]
 
 
 # Application definition
