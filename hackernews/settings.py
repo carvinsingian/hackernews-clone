@@ -26,7 +26,8 @@ SECRET_KEY = 'a@i$vib*a8665n8rvg#eq6svr*n5c6$evrwkivtgbp5!t%=62t'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'hackernews-clone-carvin.herokuapp.com'
+    'hackernews-clone-carvin.herokuapp.com',
+    'localhost'
 ]
 
 
