@@ -15,6 +15,10 @@ class Header extends Component {
           <Link to="/create" className="ml1 no-underline black">
             submit
           </Link>
+          <div className="ml1">|</div>
+          <Link to="/login" className="ml1 no-underline black">
+            login
+          </Link>
         </div>
       </div>
     )
