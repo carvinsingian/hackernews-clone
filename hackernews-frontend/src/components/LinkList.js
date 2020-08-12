@@ -4,7 +4,7 @@ import Link from './Link'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const LINKS_QUERY = gql`
+export const LINKS_QUERY = gql`
   {
     links {
       id
@@ -18,7 +18,6 @@ const LINKS_QUERY = gql`
         edges {
           node {
             user {
-              id
               username
             }
           }
@@ -27,7 +26,6 @@ const LINKS_QUERY = gql`
     }
   }
 `
-
 class LinkList extends Component {
   render() {
     return (
@@ -40,12 +38,21 @@ class LinkList extends Component {
 
           return (
             <div>
-              {linksToRender.map((link, index) => <Link key={link.id} link={link} index={index} />)}
+              {linksToRender.map((link, index) => <Link key={link.id} link={link} index={index} updateStoreAfterVote={this._updateCacheAfterVote} />)}
             </div>
           )
         }}
       </Query>
     )
+  }
+
+  _updateCacheAfterVote = (store, createVote, linkId) => {
+    const data = store.readQuery({ query: LINKS_QUERY })
+
+    const votedLink = data.links.find(link => link.id === linkId)
+    votedLink.votes.edges = createVote.link.votes.edges
+
+    store.writeQuery({ query: LINKS_QUERY, data })
   }
 }
 
