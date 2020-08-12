@@ -1,2 +1,5 @@
 # hackernews-clone
-Getting started exercise for using Django and Graphene
+Hackernews clone using the ff technologies:
+
+Frontend - React, Apollo
+Backend - Python, Django, GraphQL
