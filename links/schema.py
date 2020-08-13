@@ -101,3 +101,9 @@ class Mutation(graphene.ObjectType):
   create_vote = CreateVote.Field()
 
 
+
+# class Subscription(graphene.ObjectTpye):
+#   newLink = graphene.Field(LinkType)
+
+#   def resolve_newLink(self, info):
+
