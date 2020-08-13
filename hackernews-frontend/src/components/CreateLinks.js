@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { LINKS_QUERY } from './LinkList'
+import { LINKS_PER_PAGE } from '../constants'
 
 
 const LINK_MUTATION = gql`
@@ -10,6 +11,10 @@ const LINK_MUTATION = gql`
       id
       url
       description
+      postedBy {
+        id
+        username
+      }
     }
   }
 `
@@ -43,13 +48,25 @@ class CreateLink extends Component {
         <Mutation
           mutation={LINK_MUTATION}
           variables={{ description, url }}
-          onCompleted={() => this.props.history.push('/')}
+          onCompleted={() => this.props.history.push('/new/1')}
           update={(store, { data: { createLink } }) => {
-            const data = store.readQuery({ query: LINKS_QUERY });
+            createLink = {
+              ...createLink,
+              votes: {
+                edges: []
+              }
+            }
+            const first = LINKS_PER_PAGE
+            const skip = 0
+            const data = store.readQuery({
+              query: LINKS_QUERY,
+              variables: { first, skip }
+            });
             data.links.unshift(createLink)
             store.writeQuery({
               query: LINKS_QUERY,
-              data
+              data,
+              variables: { first, skip }
             })
           }}
         >
