@@ -139,6 +139,7 @@ class LinkList extends Component {
 
 
   _subscribeToNewLinks = subscribeToMore => {
+    console.log("going in")
     subscribeToMore({
       document: NEW_LINK_SUBSCRIPTION,
       updateQuery: (prev, { subscriptionData }) => {
