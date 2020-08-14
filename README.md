@@ -1,4 +1,4 @@
-# hackernews-clone-server
+# hackernews-clone
 Hackernews clone using the ff technologies:
 
 Frontend - React, Apollo
