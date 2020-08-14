@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { AUTH_TOKEN } from '../constants'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { printIntrospectionSchema } from 'graphql'
 
 
 const LOGIN_MUTATION = gql`
