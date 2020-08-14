@@ -30,9 +30,9 @@ export const LINKS_QUERY = gql`
   }
 `
 
-const CREATE_LINK_SUBSCRIPTION = gql`
+const NEW_LINK_SUBSCRIPTION = gql`
   subscription {
-    createLink {
+    newLink {
       id
       url
       description
@@ -48,7 +48,7 @@ class LinkList extends Component {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
 
-          // this._subscribeToNewLinks(subscribeToMore)
+          this._subscribeToNewLinks(subscribeToMore)
 
           const linksToRender = this._getLinksToRender(data)
           const isNewPage = this.props.location.pathname.includes('new')
@@ -138,23 +138,23 @@ class LinkList extends Component {
   }
 
 
-  // _subscribeToNewLinks = subscribeToMore => {
-  //   subscribeToMore({
-  //     document: CREATE_LINK_SUBSCRIPTION,
-  //     updateQuery: (prev, { subscriptionData }) => {
-  //       console.log('subscription');
-  //       if (!subscriptionData.data) return prev
-  //       const createLink = subscriptionData.data.createLink
-  //       const exists = prev.links.find(({ id }) => id === createLink.id)
-  //       if (exists) return prev;
+  _subscribeToNewLinks = subscribeToMore => {
+    subscribeToMore({
+      document: NEW_LINK_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        console.log('subscription');
+        if (!subscriptionData.data) return prev
+        const newLink = subscriptionData.data.newLink
+        const exists = prev.links.find(({ id }) => id === newLink.id)
+        if (exists) return prev;
 
-  //       return Object.assign({}, prev, {
-  //         links: [createLink, ...prev.links],
-  //         __typename: prev.__typename
-  //       })
-  //     }
-  //   })
-  // }
+        return Object.assign({}, prev, {
+          links: [newLink, ...prev.links],
+          __typename: prev.__typename
+        })
+      }
+    })
+  }
 }
 
 export default LinkList

@@ -5,6 +5,9 @@ from django.db.models import Q
 from .models import Link, Vote
 from users.schema import UserType
 
+from rx import Observable
+from graphene_subscriptions.events import CREATED
+
 class LinkType(DjangoObjectType):
   class Meta:
     model = Link
@@ -102,8 +105,11 @@ class Mutation(graphene.ObjectType):
 
 
 
-# class Subscription(graphene.ObjectTpye):
-#   newLink = graphene.Field(LinkType)
+class Subscription(graphene.ObjectType):
+  newLink = graphene.Field(LinkType)
 
-#   def resolve_newLink(self, info):
-
+  def resolve_newLink(root, info):
+    return root.filter(
+      lambda event:
+        event.opreration == CREATED and isinstance(event.instance, Link)
+    ).map(lambda event: event.instance)

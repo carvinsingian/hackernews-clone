@@ -16,4 +16,7 @@ class Mutation(users.schema.Mutation, links.schema.Mutation, links.schema_relay.
   refresh_token = graphql_jwt.Refresh.Field()
 
 
-schema = graphene.Schema(query=Query, mutation=Mutation)
+class Subscription(links.schema.Subscription):
+  pass
+
+schema = graphene.Schema(query=Query, mutation=Mutation, subscription=Subscription)

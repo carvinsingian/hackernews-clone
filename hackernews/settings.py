@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
-    'links'
+    'links',
+    'graphene_subscriptions',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +142,11 @@ AUTHENTICATION_BACKENDS = [
   'graphql_jwt.backends.JSONWebTokenBackend',
   'django.contrib.auth.backends.ModelBackend',
 ]
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
+ASGI_APPLICATION = "hackernews.routing.application"
